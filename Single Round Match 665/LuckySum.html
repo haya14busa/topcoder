@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>TopCoder Single Round Match 665 - 500: LuckyCycle</title>
+    <title>TopCoder Single Round Match 665 - 900: LuckySum</title>
     
     <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
     
@@ -215,8 +215,8 @@ li.testcase .data {
     <h1 class="heading">
         <span id='contest-name'>Single Round Match 665</span>
         
-        <span id='problem-score'>500</span>
-        <span id='problem-name'>LuckyCycle</span>
+        <span id='problem-score'>900</span>
+        <span id='problem-name'>LuckySum</span>
     </h1>
 
     <hr />
@@ -226,49 +226,21 @@ li.testcase .data {
         <h2 class="section-title">Problem Statement</h2>
         <div class="problem-intro">
             <intro escaped="1"><p>
-This problem is about trees.
-A tree consists of some special points (called nodes), and some lines (called edges) that connect those points.
-Each edge connects exactly two nodes.
-If there are N nodes in a tree, there are exactly N-1 edges.
-The edges of a tree must connect the nodes in such a way that the tree is connected: 
-it must be possible to get from any node to any other node by traversing some sequence of edges.
-Note that this implies that a tree never contains a cycle:
-for each pair of nodes there is exactly one way to reach one from the other without using the same edge twice.
+A lucky number is a positive integer such that each of its digits is a 4 or a 7.
+A lucky sum is the sum of two (not necessarily distinct) lucky numbers.
+Cat loves lucky sums!
 </p>
 <br />
 <p>
-Dog has a tree.
-The edges in Dog's tree have weights.
-As Dog likes the numbers 4 and 7, the weight of each edge is either 4 or 7.
+Cat has a <type>String</type> <b>note</b>.
+Each character in <b>note</b> is either a digit or a question mark.
+A number matches <b>note</b> if it can be produced from <b>note</b> by changing each question mark to a single digit.
+Note that the number produced this way must not have any leading zeros: after the changes, <b>note</b>[0] must be between '1' and '9', inclusive.
 </p>
 <br />
 <p>
-Cat loves modifying trees.
-Cat is now going to modify Dog's tree by adding one new edge.
-The new edge will also have a weight that is either 4 or 7.
-The new edge will connect two nodes that don't already have an edge between them.
-Note that adding any such edge will create exactly one cycle somewhere in the tree.
-(A cycle is a sequence of consecutive edges that starts and ends in the same node.)
-</p>
-<br />
-<p>
-A cycle is balanced if the number of edges on the cycle is even, and among them the number of edges with weight 4 is the same as the number of edges with weight 7.
-Cat would like to add the new edge in such a way that the cycle it creates will be balanced.
-</p>
-<br />
-<p>
-You are given the description of Dog's current tree in <type>int[]</type>s <b>edge1</b>, <b>edge2</b>, and <b>weight</b>.
-Each of these <type>int[]</type>s will have exactly n-1 elements, where n is the number of nodes in Dog's tree.
-The nodes in Dog's tree are labeled 1 through n.
-For each valid i, Dog's tree contains an edge that connects the nodes <b>edge1</b>[i] and <b>edge2</b>[i], and the weight of this edge is <b>weight</b>[i].
-</p>
-<br />
-<p>
-Return a <type>int[]</type> with exactly three elements: {P,Q,W}.
-Here, P and Q should be the nodes connected by the new edge, and W should be the weight of the new edge.
-(Note that P and Q must be between 1 and N, inclusive, and W must be either 4 or 7.)
-If there are multiple solutions, return any of them.
-If there are no solutions, return an empty <type>int[]</type> instead.
+Find and return the smallest lucky sum that matches <b>note</b>.
+If there are no lucky sums that match <b>note</b>, return -1.
 </p></intro>
         </div>
     </div>
@@ -281,34 +253,30 @@ If there are no solutions, return an empty <type>int[]</type> instead.
             <ul class="problem-definition-lines">
                 <li class="definition-line" id='class-line'>
                     <span class='definition-name'>Class</span>
-                    <span class='definition-value'>LuckyCycle</span>
+                    <span class='definition-value'>LuckySum</span>
                 </li>
                 <li class="definition-line" id='method-line'>
                     <span class='definition-name'>Method</span>
-                    <span class='definition-value'>getEdge</span>
+                    <span class='definition-value'>construct</span>
                 </li>
                 <li class="definition-line" id='parameters-line'>
                     <span class='definition-name'>Parameters</span>
                     <span class='definition-value'>
                     
-                        int[]
-                    , 
-                        int[]
-                    , 
-                        int[]
+                        String
                     
                     </span>
                 </li>
                 <li class="definition-line" id='returns-line'>
                     <span class='definition-name'>Returns</span>
                     <span class='definition-value'>
-                        int[]
+                        long
                     </span>
                 </li>
                 <li class="definition-line" id='signature-line'>
                     <span class='definition-name'>Method signature</span>
                     <span class='definition-value'>
-                        int[] getEdge(int[] edge1, int[] edge2, int[] weight)
+                        long construct(String note)
                     </span>
                 </li>
             </ul>
@@ -341,15 +309,13 @@ If there are no solutions, return an empty <type>int[]</type> instead.
         <h2 class="section-title">Constraints</h2>
         <ul class="constraints">
         
-            <li><user-constraint escaped="1">N will be between 2 and 100, inclusive.</user-constraint></li>
+            <li><user-constraint escaped="1"><b>note</b> will contain between 1 and 14 characters, inclusive.</user-constraint></li>
         
-            <li><user-constraint escaped="1"><b>edge1</b>, <b>edge2</b>, and <b>weight</b> will each contain exactly N-1 elements.</user-constraint></li>
+            <li><user-constraint escaped="1">Each character of <b>note</b> will be either a digit ('0'-'9') or a question mark ('?').</user-constraint></li>
         
-            <li><user-constraint escaped="1">Each element of <b>weight</b> will be either 4 or 7</user-constraint></li>
+            <li><user-constraint escaped="1">The first character of <b>note</b> will not be '0'.</user-constraint></li>
         
-            <li><user-constraint escaped="1">Each element of <b>edge1</b> and <b>edge2</b> will be between 1 and N, inclusive.</user-constraint></li>
-        
-            <li><user-constraint escaped="1">The input will define a tree.</user-constraint></li>
+            <li><user-constraint escaped="1">At least one character of note will be '?'.</user-constraint></li>
         
         </ul>
     </div>
@@ -366,28 +332,10 @@ If there are no solutions, return an empty <type>int[]</type> instead.
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">edge1</span>
+                                <span class="name data">note</span>
                                 <span class="value data">
                                 
-                                    { 1 }
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">edge2</span>
-                                <span class="value data">
-                                
-                                    { 2 }
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">weight</span>
-                                <span class="value data">
-                                
-                                    { 4 }
+                                    &quot;?&quot;
                                 
                                 </span>
                             </li>
@@ -399,14 +347,14 @@ If there are no solutions, return an empty <type>int[]</type> instead.
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            {  }
+                            8
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">We cannot add any edge because the only two nodes are already connected by an edge.</div>
+                        <div class="testcase-comment">4+4=8, which is the smallest lucky sum.</div>
                     </div>
                     
                
@@ -420,28 +368,10 @@ If there are no solutions, return an empty <type>int[]</type> instead.
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">edge1</span>
+                                <span class="name data">note</span>
                                 <span class="value data">
                                 
-                                    { 1, 3, 2, 4 }
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">edge2</span>
-                                <span class="value data">
-                                
-                                    { 2, 2, 4, 5 }
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">weight</span>
-                                <span class="value data">
-                                
-                                    { 4, 7, 4, 7 }
+                                    &quot;?1&quot;
                                 
                                 </span>
                             </li>
@@ -453,19 +383,14 @@ If there are no solutions, return an empty <type>int[]</type> instead.
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            { 1, 5, 7 }
+                            11
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">The input describes a tree with 5 nodes.
-The tree contains the following edges: 1-2 (weight 4), 3-2 (weight 7), 2-4 (weight 4), and 4-5 (weight 7).
-The example return value describes a new edge that connects nodes 1 and 5, and has weight 7.
-
-Adding the new edge creates a cycle that goes through the nodes 1, 2, 4, and 5, in this order.
-This cycle is balanced: two of its four edges have weight 4 and the other two have weight 7.</div>
+                        <div class="testcase-comment">4+7=11</div>
                     </div>
                     
                
@@ -479,28 +404,10 @@ This cycle is balanced: two of its four edges have weight 4 and the other two ha
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">edge1</span>
+                                <span class="name data">note</span>
                                 <span class="value data">
                                 
-                                    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">edge2</span>
-                                <span class="value data">
-                                
-                                    { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 }
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">weight</span>
-                                <span class="value data">
-                                
-                                    { 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7 }
+                                    &quot;4?8&quot;
                                 
                                 </span>
                             </li>
@@ -512,11 +419,16 @@ This cycle is balanced: two of its four edges have weight 4 and the other two ha
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            { 1, 12, 7 }
+                            448
                         
                         </span>
                     </div>
                     
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">4+444=448</div>
+                    </div>
+                    
                
                 </div>
             </li>
@@ -528,28 +440,10 @@ This cycle is balanced: two of its four edges have weight 4 and the other two ha
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">edge1</span>
+                                <span class="name data">note</span>
                                 <span class="value data">
                                 
-                                    { 1, 2, 3, 5, 6 }
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">edge2</span>
-                                <span class="value data">
-                                
-                                    { 2, 3, 4, 3, 5 }
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">weight</span>
-                                <span class="value data">
-                                
-                                    { 4, 7, 7, 7, 7 }
+                                    &quot;2??&quot;
                                 
                                 </span>
                             </li>
@@ -561,7 +455,43 @@ This cycle is balanced: two of its four edges have weight 4 and the other two ha
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            { 1, 4, 4 }
+                            -1
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">The numbers that match this <b>note</b> are the numbers 200 through 299. None of these numbers is a lucky sum.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">note</span>
+                                <span class="value data">
+                                
+                                    &quot;??????????????&quot;
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            11888888888888
                         
                         </span>
                     </div>
